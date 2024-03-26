@@ -1,0 +1,275 @@
+\ProvidesPackage{beamerthemeTACsy}
+
+\mode<presentation>
+
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{pifont}
+\usepackage{ifthen}
+\usepackage{etoolbox}
+\usepackage{framed}
+\usepackage{hyperref}
+
+\usetikzlibrary{positioning}
+
+\def\templatefiguredir{template_figures}
+\def\presentername{Presenter Name}
+\def\presenteremail{Presenter E-Mail}
+\def\unilogopath{\templatefiguredir/leipzig_university_logo_light.pdf}
+\def\closinglinecontent{Questions?}
+\def\presenterphotooffset{0.0,0.0}
+\def\presenterphotofile{\templatefiguredir/presenter.jpg}
+
+\newcommand{\presenter}[2]{
+	\def\presentername{#1}
+	\def\presenteremail{#2}
+}
+
+\newcommand{\insertpresenter}{
+	\presentername \\ 
+	\presenteremail
+}
+
+\newcommand{\closingline}[1]{
+	\def\closinglinecontent{#1}
+}
+
+\newcommand{\conference}[1]{
+	\def\conferencename{#1}
+}
+
+\newcommand{\presenterphoto}[2]{
+	\def\presenterphotofile{#1}
+	\def\presenterphotooffset{#2}
+}
+
+\newcommand{\qrcode}[1]{
+	\def\qrcodefile{#1}
+}
+
+\newcommand{\unilogo}[1]{
+	% if you add a new logo make sure the image has an aspect ratio of 2.856:1 (width:height)
+	\ifthenelse{\equal{#1}{unileipzig}}{
+		\def\unilogopath{\templatefiguredir/leipzig_university_logo_light.pdf}
+	}{}
+	\ifthenelse{\equal{#1}{tuvienna}}{
+		\def\unilogopath{\templatefiguredir/tu_vienna_logo_light.pdf}
+	}{}
+	\ifthenelse{\equal{#1}{unijena}}{
+		\def\unilogopath{\templatefiguredir/jena_university_logo_light.png}
+	}{}
+	\ifthenelse{\equal{#1}{univienna}}{
+		\def\unilogopath{\templatefiguredir/vienna_university_logo_light.png}
+	}{}
+	\ifthenelse{\equal{#1}{unisheffield}}{
+		\def\unilogopath{\templatefiguredir/sheffield_university_logo_light.pdf}
+	}{}
+	\ifthenelse{\equal{#1}{sdu}}{
+		\def\unilogopath{\templatefiguredir/sdu_logo_light.png}
+	}{}
+}
+
+\let\svthefootnote\thefootnote
+\newcommand\freefootnote[1]{%
+  \let\thefootnote\relax%
+  \footnotetext{#1}%
+  \let\thefootnote\svthefootnote%
+}
+
+\definecolor{tacsydark}{HTML}{28303d}
+
+% headline colors and fonts
+\setbeamercolor{title}{fg=white,bg=tacsydark}
+\setbeamercolor{title in headline}{fg=white}
+\setbeamercolor{headline}{fg=white,bg=tacsydark}
+\setbeamercolor{author in title}{fg=white}
+\setbeamercolor{date in title}{fg=white}
+\setbeamercolor{institute in headline}{fg=lightgray}
+\setbeamercolor{logo in headline}{fg=black,bg=white}
+\setbeamercolor{title in endpage}{fg=white}
+\setbeamercolor{presenter}{fg=lightgray}
+\setbeamercolor{closingline}{fg=white}
+
+% headline colors and fonts
+\setbeamercolor{frametitle}{fg=white}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamercolor{framesectiontitle}{fg=white}
+\setbeamerfont{framesectiontitle}{size=\normalsize,series=\normalfont}
+
+% footline colors and fonts
+\setbeamercolor{footline}{fg=tacsydark,bg=white}
+\setbeamerfont{footline}{size=\footnotesize}
+
+% endpage 
+\setbeamercolor{endpage}{fg=white,bg=tacsydark}
+
+% body colors and fonts
+\setbeamercolor*{normal text}{fg=black,bg=white}
+
+% block environment
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamercolor*{block title}{fg=white,bg=tacsydark}
+\setbeamerfont{block title}{size=\LARGE,series=\bf}
+
+% example environment
+\setbeamercolor*{example title}{fg=white,bg=tacsydark}
+\setbeamerfont{example title}{size=\large,series=\bf}
+
+\setbeamertemplate{itemize item}{
+	\scriptsize\raise1.5pt\hbox{\color{tacsydark}\ding{108}}
+}
+\setbeamertemplate{itemize subitem}{
+	\tiny\raise1.5pt\hbox{\color{tacsydark}\ding{108}}
+}
+\setbeamertemplate{itemize subsubitem}{
+	\tiny\raise1.5pt\hbox{\color{tacsydark}\ding{108}}
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamercolor{titlelike}{fg=white,bg=tacsydark}
+\setbeamerfont{title}{size=\Large,series=\bfseries}
+\setbeamerfont{closingline}{size=\LARGE,series=\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{title page}{presentation}
+{%
+  \begin{tikzpicture}[remember picture,overlay,fill=tacsydark]
+      \draw[fill=tacsydark] (current page.south west) rectangle
+      (current page.north east);
+	  % Logo
+      \draw (current page.center) ++(0, 2.8) 
+		  node{\includegraphics[width=.3\paperwidth]{\templatefiguredir/tacsy_logo.jpg}};
+	  % Title
+      \draw (current page.center) ++(0, 0.5) 
+		  node[
+			font={\usebeamercolor[fg]{title}\usebeamerfont{title}},
+			align=center]
+		  {\inserttitle};
+	  % Author
+	  \draw (current page.center) ++(0, -0.5) 
+		  node[
+			font={\usebeamercolor[fg]{author in title}
+			  \usebeamerfont{author in title}}]
+		  {\insertauthor};
+	  % Date
+	  \draw (current page.center) ++(0, -1.2) 
+		  node[font={\usebeamercolor[fg]{date in title}
+		    \usebeamerfont{date in title}}]
+		  {\insertdate\@ifundefined{conferencename}{}{, \conferencename}};
+	  % Marie Curie Actions and EU logo
+      \draw (current page.south west) ++(1,1) 
+		  node[anchor=west]{\includegraphics[width=1cm]
+			{\templatefiguredir/marie_curie_actions_logo.png}} ++(1.3, 0) 
+		  node[anchor=west]{\includegraphics[width=1.4cm]
+			{\templatefiguredir/eu_flag.pdf}} ++(1.5,0) 
+		  node[anchor=west,align=left,text=white,font=\scriptsize]
+			{Funded by the\\ European Union} ++(2.5,0);
+	  % Uni logo
+      \draw (current page.south east) ++(-1,1) 
+		  node[anchor=east]{\includegraphics[width=3cm]
+			{\unilogopath}}; 
+  \end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{frametitle}
+{
+	\nointerlineskip
+    \begin{beamercolorbox}[sep=0.3cm,wd=\paperwidth,ht=0.12\paperheight]{frametitle}
+		\begin{tikzpicture}[overlay, remember picture]
+			\draw (current page.north west) ++(-0.12, 0.1) node[anchor=north west]{
+				\begin{NoHyper}
+					\usebeamercolor[fg]{framesectiontitle}
+					\usebeamerfont{framesectiontitle}
+					\strut\ifx\insertsection\empty\insertshorttitle
+						\else\insertsection\fi\\
+				\end{NoHyper}
+			};
+			\draw (current page.north west) ++(0, -0.3) node[anchor=north west]{
+				\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}
+				\strut\insertframetitle
+			};
+			\draw (current page.north east) ++(-0.3, +0.05) node[anchor=north east]{
+				\includegraphics[width=2.5cm]
+					{\templatefiguredir/tacsy-logos-reduced-neg-3_without_text.pdf}
+			};
+		\end{tikzpicture}
+    \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{footline}{
+	\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex]{footline}
+		\hspace*{\fill}
+		\usebeamercolor[fg]{footline}%
+		\usebeamerfont{footline}%
+		\insertframenumber
+		\vspace{0.7ex}
+		\hspace*{\fill}
+	\end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate{frametitle}{endpage frametitle}{}
+\defbeamertemplate{footline}{endpage footline}{}
+
+\newcommand{\insertendpage}{{
+	\setbeamertemplate{frametitle}[endpage frametitle]
+	\setbeamertemplate{footline}[endpage footline]
+	\begin{frame}
+		\nointerlineskip
+		\begin{beamercolorbox}[sep=0.3cm,wd=\paperwidth,ht=\paperheight]{endpage}
+			\begin{tikzpicture}[overlay, remember picture]
+				% Marie curie actions logo
+				\node[anchor=south west,xshift=0.02\paperwidth, yshift=0.03\paperheight] 
+					(mca_logo) at (current page.south west) 
+					{\includegraphics[height=4em]{\templatefiguredir/marie_curie_actions_logo.png}};
+
+				% EU flag and funding text
+				\node (eu_flag) [right=0 of mca_logo] 
+					{\includegraphics[height=4em]{\templatefiguredir/eu_flag.pdf}};
+				\node (funded_text) [right=0 of eu_flag,align=left] 
+					{Funded by \\ the European Union};
+				
+				% Uni logo
+				\node[anchor=south east,xshift=-0.02\paperwidth, yshift=0.03\paperheight] 
+					(uni_logo) at (current page.south east) 
+					{\includegraphics[height=4em]{\unilogopath}};
+				
+				% Presenter photo and contact info
+				\begin{scope}[xshift=2cm,yshift=0.4\paperheight]
+					\clip (0,0) circle (1);
+					\node[yshift=\presenterphotooffset] (presenter_photo) at (0,0) 
+						{\includegraphics[width=2cm]{\presenterphotofile}};
+				\end{scope}
+				\node (presenter_text) [right=0 of presenter_photo] 
+					[align=left]{\usebeamercolor[fg]{presenter}\insertpresenter};
+
+				% QR code
+				\ifx\qrcodefile\undefined\else
+					\node[xshift=-0.5cm,yshift=-0.05\paperheight,anchor=east] (qrcode) at (current page.east) {\includegraphics[height=.45\textheight]{\qrcodefile}};
+				\fi
+
+				% Closing line
+				\node[yshift=0.25\paperheight] (closingline) at (current page.center) {
+					\centering
+					\usebeamercolor[fg]{closingline}\usebeamerfont{closingline}
+					\closinglinecontent
+				};
+			\end{tikzpicture}
+		\end{beamercolorbox}
+	\end{frame}
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{colorlinks=true, allcolors=tacsydark, urlcolor=urlA}
+
+\mode<all>
+

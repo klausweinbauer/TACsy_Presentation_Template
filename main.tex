@@ -1,0 +1,54 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{amsmath,amsthm,amssymb}
+
+\usepackage{biblatex}
+\addbibresource{bibliography.bib}
+
+\usetikzlibrary{arrows,overlay-beamer-styles}
+
+\usetheme{TACsy}
+
+\title[TACsy Presentation Template]{TACsy Presentation Template} 
+\author{Klaus Weinbauer}
+\date{\today}
+%\conference{Conference Name}
+
+\institute{Bioinformatik, Institut für Informatik}
+\presenter{Klaus Weinbauer}{klaus@bioinf.uni-leipzig.de}
+
+% available logos: sdu, unileipzig, unijena, univienna, tuvienna, unisheffield
+\unilogo{unileipzig} 
+
+\closingline{Time for Questions}
+
+% remove qrcode{} if you don't need it
+\qrcode{figures/qr_code.png}
+
+% path to profile picture and vertical offset
+\presenterphoto{figures/presenter.jpg}{-5}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\maketitle
+\end{frame}
+
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Template}
+	\include{frames/template}
+\end{frame}
+
+\insertendpage
+
+\section*{Appendix}
+\begin{frame}{References}
+	\printbibliography
+\end{frame}
+
+\end{document}
