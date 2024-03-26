@@ -15,61 +15,61 @@
 \def\templatefiguredir{template_figures}
 \def\presentername{Presenter Name}
 \def\presenteremail{Presenter E-Mail}
-\def\unilogopath{\templatefiguredir/leipzig_university_logo_light.pdf}
+\def\unilogopath{\templatefiguredir/leipzig_university_logo_light.png}
 \def\closinglinecontent{Questions?}
 \def\presenterphotooffset{0.0,0.0}
 \def\presenterphotofile{\templatefiguredir/presenter.jpg}
 
-\newcommand{\presenter}[2]{
-	\def\presentername{#1}
-	\def\presenteremail{#2}
+\newcommand{\presenter}[2]{%
+	\def\presentername{#1}%
+	\def\presenteremail{#2}%
 }
 
-\newcommand{\insertpresenter}{
-	\presentername \\ 
-	\presenteremail
+\newcommand{\insertpresenter}{%
+	\presentername \\%
+	\presenteremail%
 }
 
-\newcommand{\closingline}[1]{
-	\def\closinglinecontent{#1}
+\newcommand{\closingline}[1]{%
+	\def\closinglinecontent{#1}%
 }
 
-\newcommand{\conference}[1]{
-	\def\conferencename{#1}
+\newcommand{\conference}[1]{%
+	\def\conferencename{#1}%
 }
 
-\newcommand{\presenterphoto}[2]{
-	\def\presenterphotofile{#1}
-	\def\presenterphotooffset{#2}
+\newcommand{\presenterphoto}[2]{%
+	\def\presenterphotofile{#1}%
+	\def\presenterphotooffset{#2}%
 }
 
-\newcommand{\qrcode}[1]{
-	\def\qrcodefile{#1}
+\newcommand{\qrcode}[1]{%
+	\def\qrcodefile{#1}%
 }
 
-\newcommand{\unilogo}[1]{
+\newcommand{\unilogo}[1]{%
 	% if you add a new logo make sure the image has an aspect ratio of 2.856:1 (width:height)
-	\ifthenelse{\equal{#1}{unileipzig}}{
-		\def\unilogopath{\templatefiguredir/leipzig_university_logo_light.pdf}
+	\ifthenelse{\equal{#1}{unileipzig}}{%
+		\def\unilogopath{\templatefiguredir/leipzig_university_logo_light.png}%
 	}{}
-	\ifthenelse{\equal{#1}{tuvienna}}{
-		\def\unilogopath{\templatefiguredir/tu_vienna_logo_light.pdf}
+	\ifthenelse{\equal{#1}{tuvienna}}{%
+		\def\unilogopath{\templatefiguredir/tu_vienna_logo_light.png}%
 	}{}
-	\ifthenelse{\equal{#1}{unijena}}{
-		\def\unilogopath{\templatefiguredir/jena_university_logo_light.png}
+	\ifthenelse{\equal{#1}{unijena}}{%
+		\def\unilogopath{\templatefiguredir/jena_university_logo_light.png}%
 	}{}
-	\ifthenelse{\equal{#1}{univienna}}{
-		\def\unilogopath{\templatefiguredir/vienna_university_logo_light.png}
+	\ifthenelse{\equal{#1}{univienna}}{%
+		\def\unilogopath{\templatefiguredir/vienna_university_logo_light.png}%
 	}{}
-	\ifthenelse{\equal{#1}{unisheffield}}{
-		\def\unilogopath{\templatefiguredir/sheffield_university_logo_light.pdf}
+	\ifthenelse{\equal{#1}{unisheffield}}{%
+		\def\unilogopath{\templatefiguredir/sheffield_university_logo_light.png}%
 	}{}
-	\ifthenelse{\equal{#1}{sdu}}{
-		\def\unilogopath{\templatefiguredir/sdu_logo_light.png}
+	\ifthenelse{\equal{#1}{sdu}}{%
+		\def\unilogopath{\templatefiguredir/sdu_logo_light.png}%
 	}{}
 }
 
-\let\svthefootnote\thefootnote
+\let\svthefootnote\thefootnote%
 \newcommand\freefootnote[1]{%
   \let\thefootnote\relax%
   \footnotetext{#1}%
@@ -115,14 +115,14 @@
 \setbeamercolor*{example title}{fg=white,bg=tacsydark}
 \setbeamerfont{example title}{size=\large,series=\bf}
 
-\setbeamertemplate{itemize item}{
-	\scriptsize\raise1.5pt\hbox{\color{tacsydark}\ding{108}}
+\setbeamertemplate{itemize item}{%
+	\scriptsize\raise1.5pt\hbox{\color{tacsydark}\ding{108}}%
 }
-\setbeamertemplate{itemize subitem}{
-	\tiny\raise1.5pt\hbox{\color{tacsydark}\ding{108}}
+\setbeamertemplate{itemize subitem}{%
+	\tiny\raise1.5pt\hbox{\color{tacsydark}\ding{108}}%
 }
-\setbeamertemplate{itemize subsubitem}{
-	\tiny\raise1.5pt\hbox{\color{tacsydark}\ding{108}}
+\setbeamertemplate{itemize subsubitem}{%
+	\tiny\raise1.5pt\hbox{\color{tacsydark}\ding{108}}%
 }
 
 \setbeamertemplate{navigation symbols}{}
@@ -133,8 +133,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\defbeamertemplate*{title page}{presentation}
-{%
+\defbeamertemplate*{title page}{presentation}{%
   \begin{tikzpicture}[remember picture,overlay,fill=tacsydark]
       \draw[fill=tacsydark] (current page.south west) rectangle
       (current page.north east);
@@ -176,8 +175,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\setbeamertemplate{frametitle}
-{
+\setbeamertemplate{frametitle}{%
 	\nointerlineskip
     \begin{beamercolorbox}[sep=0.3cm,wd=\paperwidth,ht=0.12\paperheight]{frametitle}
 		\begin{tikzpicture}[overlay, remember picture]
@@ -185,8 +183,7 @@
 				\begin{NoHyper}
 					\usebeamercolor[fg]{framesectiontitle}
 					\usebeamerfont{framesectiontitle}
-					\strut\ifx\insertsection\empty\insertshorttitle
-						\else\insertsection\fi\\
+					\ifx\insertsection\empty\insertshorttitle\else\insertsection\fi
 				\end{NoHyper}
 			};
 			\draw (current page.north west) ++(0, -0.3) node[anchor=north west]{
@@ -195,7 +192,7 @@
 			};
 			\draw (current page.north east) ++(-0.3, +0.05) node[anchor=north east]{
 				\includegraphics[width=2.5cm]
-					{\templatefiguredir/tacsy-logos-reduced-neg-3_without_text.pdf}
+					{\templatefiguredir/tacsy-logos-reduced-neg-3_without_text.png}
 			};
 		\end{tikzpicture}
     \end{beamercolorbox}
@@ -203,7 +200,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setbeamertemplate{footline}{
+\setbeamertemplate{footline}{%
 	\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex]{footline}
 		\hspace*{\fill}
 		\usebeamercolor[fg]{footline}%
@@ -219,7 +216,7 @@
 \defbeamertemplate{frametitle}{endpage frametitle}{}
 \defbeamertemplate{footline}{endpage footline}{}
 
-\newcommand{\insertendpage}{{
+\newcommand{\insertendpage}{{%
 	\setbeamertemplate{frametitle}[endpage frametitle]
 	\setbeamertemplate{footline}[endpage footline]
 	\begin{frame}
@@ -253,7 +250,7 @@
 
 				% QR code
 				\ifx\qrcodefile\undefined\else
-					\node[xshift=-0.5cm,yshift=-0.05\paperheight,anchor=east] (qrcode) at (current page.east) {\includegraphics[height=.45\textheight]{\qrcodefile}};
+					\node[xshift=-0.5cm,yshift=-0.05\paperheight,anchor=east] (qrcode) at (current page.east) {\includegraphics[height=.4\textheight]{\qrcodefile}};
 				\fi
 
 				% Closing line
@@ -269,7 +266,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\hypersetup{colorlinks=true, allcolors=tacsydark, urlcolor=urlA}
+\hypersetup{colorlinks=true, allcolors=tacsydark, urlcolor=black}
 
 \mode<all>
 
